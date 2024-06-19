@@ -10,8 +10,8 @@
 //  must be separated within the same file.
 
 //! Pair Programming - Members Names and Location
-//! Name 1:
-//! Name 2:
+//! Name 1: Md Jubayer Islam (A23MJ4007)
+//! Name 2: Zinut Ferdous (A23MJ4017)
 
 #include <iostream>
 #include <string>
@@ -77,14 +77,18 @@ public:
 // Task 1(d): Declare the class Mentee.
 class Mentee : public Mentor
 {
+private:
+    Mentor *mentor;
+
 protected:
     int level;
 
 public:
     Mentee(string name, int level);
     void assignMentor(Mentor *mentor);
+
     void displayInfo() const;
-    void displayMentor(Mentor *mentor) const;
+    void displayMentor();
 };
 
 //-------------------------------------------------------------------------------------------------------------
@@ -201,8 +205,7 @@ Mentee::Mentee(string name, int level)
 
 void Mentee::assignMentor(Mentor *mentor)
 {
-
-    cout << "Mentor assigned" << endl;
+    this->mentor = mentor;
 }
 
 void Mentee::displayInfo() const
@@ -211,10 +214,18 @@ void Mentee::displayInfo() const
     cout << "Level: " << level << endl;
 }
 
-void Mentee::displayMentor(Mentor *mentor) const
+void Mentee::displayMentor()
 {
+    cout << "Mentor: ";
 
-    mentor->print();
+    if (mentor == NULL)
+    {
+        cout << "No mentor assigned" << endl;
+    }
+    else
+    {
+        mentor->print();
+    }
 }
 //-------------------------------------------------------------------------------------------------------------
 // The menu function is given
@@ -312,10 +323,11 @@ int main()
             cout << "List of mentees:" << endl;
             for (int i = 0; i < 3; i++)
             {
-                cout << "Mentee " << i << endl;
+                int j = i + 1;
+                cout << "Mentee " << j << endl;
                 mentees[i].displayInfo();
                 cout << endl;
-                mentees[i].displayMentor(mentorPtr);
+                mentees[i].displayMentor();
             }
 
             break;
